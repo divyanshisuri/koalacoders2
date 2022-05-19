@@ -32,6 +32,10 @@ def dailychecklist():
 def snake():
     return render_template("snake.html")
 
+@app.route('/grocery/')
+def grocery():
+    return render_template("grocerylist.html")
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
