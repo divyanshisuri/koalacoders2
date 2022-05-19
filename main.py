@@ -13,7 +13,7 @@ app = Flask(__name__)
 # connects default URL to render index.html
 @app.route('/')
 def index():
-    return render_template("index.html", darkmode=darkmode)
+    return render_template("index.html")
 
 
 @app.route('/platformer/')
