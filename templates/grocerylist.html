@@ -4,167 +4,50 @@
 <html>
 
 {% block body %}
-    <head>
+
     </head>
     <canvas id="canvas"></canvas>
     <script>
-        var btn = document.querySelector('.add');
-        var remove = document.querySelector('.draggable');
-
-        function dragStart(e) {
-            this.style.opacity = '0.4';
-            dragSrcEl = this;
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
-        };
-
-        function dragEnter(e) {
-            this.classList.add('over');
-        }
-
-        function dragLeave(e) {
-            e.stopPropagation();
-            this.classList.remove('over');
-        }
-
-        function dragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            return false;
-        }
-
-        function dragDrop(e) {
-            if (dragSrcEl != this) {
-                dragSrcEl.innerHTML = this.innerHTML;
-                this.innerHTML = e.dataTransfer.getData('text/html');
-            }
-            return false;
-        }
-
-        function dragEnd(e) {
-            var listItens = document.querySelectorAll('.draggable');
-            [].forEach.call(listItens, function(item) {
-                item.classList.remove('over');
+        /* Custom Dragula JS */
+        dragula([
+            document.getElementById("to-do"),
+            document.getElementById("doing"),
+            document.getElementById("done"),
+            document.getElementById("trash")
+        ]);
+        removeOnSpill: false
+            .on("drag", function(el) {
+                el.className.replace("ex-moved", "");
+            })
+            .on("drop", function(el) {
+                el.className += "ex-moved";
+            })
+            .on("over", function(el, container) {
+                container.className += "ex-over";
+            })
+            .on("out", function(el, container) {
+                container.className.replace("ex-over", "");
             });
-            this.style.opacity = '1';
+
+        /* Vanilla JS to add a new task */
+        function addTask() {
+            /* Get task text from input */
+            var inputTask = document.getElementById("taskText").value;
+            /* Add task to the 'To Do' column */
+            document.getElementById("to-do").innerHTML +=
+                "<li class='task'><p>" + inputTask + "</p></li>";
+            /* Clear task text from input after adding task */
+            document.getElementById("taskText").value = "";
         }
 
-        function addEventsDragAndDrop(el) {
-            el.addEventListener('dragstart', dragStart, false);
-            el.addEventListener('dragenter', dragEnter, false);
-            el.addEventListener('dragover', dragOver, false);
-            el.addEventListener('dragleave', dragLeave, false);
-            el.addEventListener('drop', dragDrop, false);
-            el.addEventListener('dragend', dragEnd, false);
+        /* Vanilla JS to delete tasks in 'Trash' column */
+        function emptyTrash() {
+            /* Clear tasks from 'Trash' column */
+            document.getElementById("trash").innerHTML = "";
         }
 
-        var listItens = document.querySelectorAll('.draggable');
-        [].forEach.call(listItens, function(item) {
-            addEventsDragAndDrop(item);
-        });
-
-        function addNewItem() {
-            var newItem = document.querySelector('.input').value;
-            if (newItem != '') {
-                document.querySelector('.input').value = '';
-                var li = document.createElement('li');
-                var attr = document.createAttribute('draggable');
-                var ul = document.querySelector('ul');
-                li.className = 'draggable';
-                attr.value = 'true';
-                li.setAttributeNode(attr);
-                li.appendChild(document.createTextNode(newItem));
-                ul.appendChild(li);
-                addEventsDragAndDrop(li);
-            }
-        }
-
-        btn.addEventListener('click', addNewItem);
     </script>
     <style>
-        body {
-            background-color:blue;
-        h1{
-            text-align: center;
-            font-family:"Times New Roman";
-            color: white;
-            font-size: 50px;
-            font-weight: normal;
-        }
-        .adder {
-            position: relative;
-            width: 250px;
-            margin: 0px auto;
-            display: block;
-        ::-webkit-input-placeholder {
-            color: #cecece;
-        }
-        .input {
-            outline: none;
-            border: 1px solid white;
-            background-color: blue;
-            color: white;
-            height: 50px;
-            width: 250px;
-            padding-left: 10px;
-            font-family: "Times New Roman";
-            font-weight: 800;
-            font-size: 16px;
-            margin-left: -5px;
-        }
-        span {
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 30px;
-            font-weight: 800;
-            line-height: 1.8;
-            cursor: pointer;
-            transition: all 200ms;
-            color: white;
-            will-change: transform;
-        hover{
-             transform: rotate(180deg);
-         }
-        }
-        }
-        ul {
-            padding: 0px;
-        .draggable {
-            will-change: transform;
-            font-weight: 800;
-            height: 50px;
-            list-style-type: none;
-            margin: 10px;
-            background-color: white;
-            color: $blue;
-            width: 250px;
-            line-height: 3.2;
-            padding-left: 10px;
-            cursor: move;
-            transition: all 200ms;
-            user-select: none;
-            margin: 10px auto;
-            position: relative;
-        after {
-             content: 'drag me';
-             right: 7px;
-             font-size: 10px;
-             position: absolute;
-             cursor: pointer;
-             line-height: 5;
-             transition: all 200ms;
-             transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.50);
-             transform: translateX(120%);
-             opacity: 0;
-         }
-         }
-        }
-        }
-        }
-        }
-        over {
-            transform: scale(1.1, 1.1);
-        }
+
     </style>
 {% endblock %}

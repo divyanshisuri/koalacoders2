@@ -36,6 +36,10 @@ def snake():
 def grocery():
     return render_template("grocerylist.html")
 
+@app.route('/spinningwheel/')
+def spinningwheel():
+    return render_template("spinningwheel.html")
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
