@@ -13,7 +13,7 @@
     </head>
     <canvas id="canvas"></canvas>
     <script>
-        var padding = {top:20, right:40, bottom:0, left:0},
+        var padding = {top:100, right:40, bottom:0, left:100},
             w = 500 - padding.left - padding.right,
             h = 500 - padding.top  - padding.bottom,
             r = Math.min(w, h)/2,
@@ -25,16 +25,16 @@
         //randomNumbers = getRandomNumbers();
         //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
         var data = [
-            {"label":"Dell LAPTOP",  "value":1,  "question":"What CSS property is used for specifying the area between the content and its border?"}, // padding
-            {"label":"IMAC PRO",  "value":2,  "question":"What CSS property is used for changing the font?"}, //font-family
-            {"label":"SUZUKI",  "value":3,  "question":"What CSS property is used for changing the color of text?"}, //color
-            {"label":"HONDA",  "value":4,  "question":"What CSS property is used for changing the boldness of text?"}, //font-weight
-            {"label":"FERRARI",  "value":5,  "question":"What CSS property is used for changing the size of text?"}, //font-size
-            {"label":"APARTMENT",  "value":6,  "question":"What CSS property is used for changing the background color of a box?"}, //background-color
-            {"label":"IPAD PRO",  "value":7,  "question":"Which word is used for specifying an HTML tag that is inside another tag?"}, //nesting
-            {"label":"LAND",  "value":8,  "question":"Which side of the box is the third number in: margin:1px 1px 1px 1px; ?"}, //bottom
-            {"label":"MOTOROLLA",  "value":9,  "question":"What are the fonts that don't have serifs at the ends of letters called?"}, //sans-serif
-            {"label":"BMW", "value":10, "question":"With CSS selectors, what character prefix should one use to specify a class?"}
+            {"label":"Video Game",  "value":1,  "question":"Play a Video Game with a few friends in a rec lounge!"}, // padding
+            {"label":"Library",  "value":2,  "question":"You need a quiet space to study. Go to the library!"}, //font-family
+            {"label":"Snack Break",  "value":3,  "question":"Grab some coffee or baked goods at the local Starbucks with some friends to de-stress"}, //color
+            {"label":"Road Trip",  "value":4,  "question":"Take a road trip to a nearby city in your car. Visit some nice quaint towns!"}, //font-weight
+            {"label":"TA Office Hours",  "value":5,  "question":"Go to TA Office Hours for some extra support!"}, //font-size
+            {"label":"Quad",  "value":6,  "question":"Relax near the trees in the quad on a sunny day! Spot a squirrel ot two!"}, //background-color
+            {"label":"Dinner",  "value":7,  "question":"Go for a classy dinner at a fancy local spot with your friends!"}, //nesting
+            {"label":"Movie Night",  "value":8,  "question":"Grab some friends and some popcorn and watch a scary movie on Netflix!"}, //bottom
+            {"label":"Shopping",  "value":9,  "question":"Support local businesses and shop unique outfits and handmade goods in your town!"}, //sans-serif
+            {"label":"Dorm", "value":10, "question":"Chill out or study with your roommates in your dorm!"}
         ];
         var svg = d3.select('#chart')
             .append("svg")
@@ -172,6 +172,7 @@
             height:500px;
             top:0;
             left:0;
+            right:2px;
         }
         #question{
             position: absolute;
@@ -181,10 +182,10 @@
             left:520px;
         }
         #question h1{
-            font-size: 50px;
+            font-size: 30px;
             font-weight: bold;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            position: absolute;
+            position: relative;
             padding: 0;
             margin: 0;
             top:50%;
