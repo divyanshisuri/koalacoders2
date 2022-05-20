@@ -32,8 +32,8 @@ def dailychecklist():
 def snake():
     return render_template("snake.html")
 
-@app.route('/grocery/')
-def grocery():
+@app.route('/grocerylist/')
+def grocerylist():
     return render_template("grocerylist.html")
 
 @app.route('/spinningwheel/')
