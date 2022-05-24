@@ -40,6 +40,10 @@ def grocerylist():
 def spinningwheel():
     return render_template("spinningwheel.html")
 
+@app.route('/weather/')
+def weather():
+    return render_template("weather.html")
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
