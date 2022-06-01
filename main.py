@@ -1,7 +1,6 @@
 # import "packages" from flask
 from flask import Flask, render_template, request
 
-from crud.appCrud import app_crud
 from __init__ import app
 
 import os
@@ -13,7 +12,8 @@ import random
 # create a Flask instance
 app = Flask(__name__)
 
-app.register_blueprint(app_crud)
+
+
 # connects default URL to render index.html
 @app.route('/')
 def index():
@@ -44,18 +44,19 @@ def grocerylist():
 def spinningwheel():
     return render_template("spinningwheel.html")
 
-@app.route('/gradecalc/')
-def gradecalc():
-    return render_template("gradecalc.html")
-
-
 @app.route('/blog/')
 def blog():
     return render_template("upload.html")
 
+@app.route('/calculator/')
+def calculator():
+    return render_template("calculator.html")
+
 @app.route('/crud/')
 def crud():
     return render_template("crud.html")
+
+
 
 @app.route('/budget/')
 def budget():
