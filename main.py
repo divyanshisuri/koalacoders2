@@ -52,6 +52,14 @@ def blog():
 def calculator():
     return render_template("calculator.html")
 
+@app.route('/whiteboard/')
+def whiteboard():
+    return render_template("whiteboard.html")
+
+@app.route('/calendar/')
+def calendar():
+    return render_template("calendar.html")
+
 @app.route('/crud/')
 def crud():
     return render_template("crud.html")
