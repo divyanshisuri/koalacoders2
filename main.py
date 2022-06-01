@@ -1,7 +1,8 @@
 # import "packages" from flask
 from flask import Flask, render_template, request
 
-from templates.cruddy.app_crud import app_crud
+from crud.appCrud import app_crud
+from __init__ import app
 
 import os
 import requests
@@ -50,6 +51,17 @@ def weather():
 @app.route('/blog/')
 def blog():
     return render_template("upload.html")
+
+@app.route('/crud/')
+def crud():
+    return render_template("crud.html")
+
+@app.route('/budget/')
+def budget():
+    return render_template("budget.html")
+
+
+
 
 
 

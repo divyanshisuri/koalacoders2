@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<html>
+{% block body %}
+<div class="card">
+    <div  class="header">
+        <h1 class="headerText">Monthly Budget</h1>
+    </div>
+    <form name="budgetForm">
+        <div class="inputs">
+            <h4><i class="fa fa-home" aria-hidden="true"></i> <span class="rightText">Rent/Mortgage</span></h4>
+                <input type="text" name="rent" placeholder="0" value=""/>
+                <h4><i class="fa fa-car" aria-hidden="true"></i> Car Payment</h4>
+                    <input type="text" name="car" placeholder="0" value=""/>
+                    <h4><i class="fa fa-phone" aria-hidden="true"></i> Cell Phone</h4>
+                        <input type="text" name="phone" placeholder="0" value=""/>
+                        <h4><i class="fa fa-cutlery" aria-hidden="true"></i> Food/Gas</h4>
+                            <input type="text" name="foodGas" placeholder="0" value=""/>
+                            <h4><i class="fa fa-plus" aria-hidden="true"></i> Other</h4>
+                                <input type="text" name="other" placeholder="0" value=""/>
+                                <h4><i class="fa fa-arrow-right" aria-hidden="true"></i> Amount for Monthly<br><span style="padding-left: 19px;">Bills Per Week</span></h4>
+                                    <input type="text" id="answer" name="Result" placeholder="$0.00" value="" readonly/>
+                                    <h4><i class="fa fa-arrow-right" aria-hidden="true"></i> Monthly Expenses</h4>
+                                        <input type="text" id="answer2" name="Result" placeholder="$0.00" value="" readonly/>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary btn-width" type="button" name="button" value="Submit" onClick="total()"/>
+            <input class="btn btn-success btn-width" type="reset" value="Reset"/>
+        </div>
+    </form>
+</div>
+
+<style>
+
+    body {
+        height: 850px;
+        background: #4d94ff;
+        background: -webkit-linear-gradient(left, #4d94ff , #e6e6ff);
+        background: -o-linear-gradient(top right, #4d94ff, #e6e6ff);
+        background: -moz-linear-gradient(bottom right, #4d94ff, #e6e6ff);
+        background: linear-gradient(to bottom right, #4d94ff , #e6e6ff);
+    }
+    .card {
+        background-color: #fff;
+        color: #808080;
+        width: 400px;
+        height: auto;
+        margin: 40px auto;
+        font-family: helvetica;
+        box-shadow: 0 6px 20px 0 rgba(53,53,53,0.5);
+    }
+    .header {
+        height: 180px;
+        text-align: center;
+        color: white;
+        background-image: url(https://www.lawrencetidwell.com/assets/img/heroimg001.jpg) ;
+    }
+    .headerText {
+        padding-top: 8vh;
+        font-size: 3.5em;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 500;
+    }
+    .inputs {
+        text-align: center;
+        padding: 20px;
+    }
+    input {
+        padding: 5px;
+        border-radius: 2px;
+        border: none;
+        border-bottom: 1px solid #808080;
+        background-color: #fff;
+    }
+    textarea:focus, input:focus{
+        outline: none;
+    }
+    .btnSubmit {
+        width: 80px;
+        padding: 10px;
+        background-color: #4d94ff;
+        color: white;
+        margin: 20px auto;
+        border-radius: 4px;
+        border: none;
+    }
+    .btnReset {
+        width: 80px;
+        padding: 10px;
+        background-color: #009933;
+        color: white;
+        margin: 20px auto;
+        border-radius: 4px;
+        border: none;
+    }
+    .text-center {
+        margin: 0 auto;
+        text-align: center;
+    }
+    h4 {
+        text-align: left;
+        padding-left: 90px
+    }
+    .btn {
+        margin-bottom: 30px;
+    }
+    .rightText {
+        text-align: right;
+    }
+</style>
+
+<script>
+    function total() {
+        var num1 = document.budgetForm.rent.value;
+        var num2 = document.budgetForm.car.value;
+        var num3 = document.budgetForm.phone.value;
+        var num4 = document.budgetForm.foodGas.value;
+        var num5 = document.budgetForm.other.value;
+
+        if (isNaN(num1) || isNaN(num2) || isNaN(num3) || isNaN(num4) || isNaN(num5)) {
+            alert('*** Sorry, you can only budget numbers. ***');
+            total = "$0.00";
+        } else if (num1 < 1 && num2 < 1 && num3 < 1 && num4 < 1 && num5 < 1) {
+            total = "$0.00";
+        } else {
+            var total = parseInt(num1) + parseInt(num2) + parseInt(num3) + parseInt(num4) + parseInt(num5);
+            document.getElementById("answer").value = '$' + total / 4 + '.00';
+            document.getElementById("answer2").value = '$' + total + '.00';
+        }
+    }
+
+
+</script>
+
+{% endblock %}
