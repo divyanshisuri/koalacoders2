@@ -1,6 +1,8 @@
 # import "packages" from flask
 from flask import Flask, render_template, request
 
+from templates.cruddy.app_crud import app_crud
+
 import os
 import requests
 import json
@@ -10,7 +12,7 @@ import random
 # create a Flask instance
 app = Flask(__name__)
 
-
+app.register_blueprint(app_crud)
 # connects default URL to render index.html
 @app.route('/')
 def index():
