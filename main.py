@@ -43,6 +43,10 @@ def snake():
 
 
 
+@app.route('/gradecalc/')
+def gradecalc():
+    return render_template("gradecalc.html")
+
 @app.route('/spinningwheel/')
 def spinningwheel():
     return render_template("spinningwheel.html")
