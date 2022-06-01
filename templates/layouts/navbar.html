@@ -1,51 +1,172 @@
 
+<head>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+</head>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    li {
+        position: relative;
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+    }
+    a {
+        z-index: 1;
+        color: navy;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+        padding: 10px 5px;
+    }
+    li::before {
+        content: "";
+        position: absolute;
+        height: 33.3%;
+        width: 0;
+        background-color: lavenderblush;
+        right: 0;
+        z-index: 0;
+        top: 33.33%;
+        transition: all 0.5s;
+    }
+    li::after {
+        content: "";
+        position: absolute;
+        height: 33.3%;
+        width: 0;
+        background-color: lavenderblush;
+        left: 0;
+        z-index: 0;
+        bottom: 0;
+        transition: all 0.5s;
+    }
+    a::before {
+        position: absolute;
+        content: "";
+        height: 33.3%;
+        width: 0;
+        background-color: lavenderblush;
+        bottom: 130%;
+        left: 0;
+        transition: all 0.5s;
+    }
+    li:hover:before,
+    li:hover::after,
+    li:hover a::before{
+        width: 100%;
+    }
+    .darkmode{
+        background-color: black;
+    }
+    .lightmode {
+        background-color: #f8f9fa;
+    }
+
+</style>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light {{darkmode}}">
+    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+    <a class="nav-link" href="{{ url_for('map') }}">Map</a>
+    <a class="nav-link" href="{{ url_for('dailychecklist') }}">Daily Checklist</a>
+    <a class="nav-link" href="{{ url_for('grocerylist') }}">Grocery List</a>
+    <a class="nav-link" href="{{ url_for('weather') }}">Weather</a>
+    <a class="nav-link" href="{{ url_for('budget') }}">Budget Tracker</a>
 
 
 
-<!-- Navigation Bar from bootstrap
-This HTML is setup as a fragment allowing it to be "included" by other HTML files via Jinja2
--->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">{{basename}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-nav">
-        <!-- url_for is a Jinja2 pre-processor that finds route from function name (def) -->
-        <a class="nav-link" href={{ url_for('index') }}>Home</a>
-        <a class="nav-link" href={{ url_for('dailychecklist') }}>Daily Checklist</a>
-        <a class="nav-link" href={{ url_for('grocerylist') }}>Grocery List Aid</a>
-        <a class="nav-link" href={{ url_for('map') }}>Where Am I?</a>
-        <a class="nav-link" href={{ url_for('platformer') }}>Platformer</a>
-        <a class="nav-link" href={{ url_for('snake') }}>Snake Game</a>
-        <a class="nav-link" href={{ url_for('spinningwheel') }}>Spinning Wheel</a>
 
+    <!-- ABOUT US DROPDOWN -->
 
-
-
-
-        <!-- stub is shown using the name of the route -->
-        <!--<a class="nav-link" href="/stub">Greet</a>-->
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <ul class="navbar-nav">
-            </ul>
-        </div>
-        <!--hi -->
-
-            nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton1" type="button">
-                Stress Relief
+    <!--  DROPDOWN -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"> Stress Relief
             </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <a class="dropdown-item" href="/platformer">Platformer</a>
-                <a class="dropdown-item" href="https://docs.google.com/document/d/1ItEfkOSJl8et1n6pr0n1H3VyyuOtrrEZ4eNztx6WK_0/edit?usp=sharing">Brainwriting/Wireframes</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="nav-link" href="{{ url_for('platformer')
+                        }}">Platformer</a>
+                <a class="nav-link" href="{{ url_for('snake')
+                        }}">Snake</a>
+                <a class="nav-link" href="{{ url_for('spinningwheel') }}">College Life Spinner</a>
+
+
+
+
+
             </div>
         </li>
-
-
-
-
-        </ul>
     </div>
+    {#    <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+    {#        <li class="nav-item dropdown">#}
+    {#            <a class="nav-link dropdown-toggle" href="#"
+id="navbarDropdown" role="button" data-toggle="dropdown"
+aria-haspopup="true" aria-expanded="false"> Photos#}
+    {#            </a>#}
+    {#            <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+    {#            </div>#}
+    {#        </li>#}
+    {#    </div>#}
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <form action="/navbarsearch" id="navbarsearch" method="POST">
+                <input name="term" id="term" required="required" />
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+    </div>
+    </div> <button onclick="toggleDarkMode()">Dark Mode</button>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </nav>
 
+<script>
+    function toggleDarkMode(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if
+                (document.getElementById("navbar").classList.contains("darkmode")){
+
+                    document.getElementById("navbar").classList.remove("darkmode");
+
+                    document.getElementById("navbar").classList.add("lightmode");
+                }
+                else {
+
+                    document.getElementById("navbar").classList.remove("lightmode");
+                    document.getElementById("navbar").classList.add("darkmode");
+                }
+            }
+        };
+        xhttp.open('POST',"/darkmode",true);
+        xhttp.send();
+    }
+
+</script>
