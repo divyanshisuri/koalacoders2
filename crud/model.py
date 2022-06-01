@@ -1,8 +1,16 @@
 """ database dependencies to support Users db examples """
 from sqlalchemy.exc import IntegrityError
 from __init__ import db
+from sqlalchemy.exc import IntegrityError
+
+# Tutorial: https://www.sqlalchemy.org/library.html#tutorials, try to get into Python shell and follow along
 
 
+# Define the Users table within the model
+# -- Object Relational Mapping (ORM) is the key concept of SQLAlchemy
+# -- a.) db.Model is like an inner layer of the onion in ORM
+# -- b.) Users represents data we want to store, something that is built on db.Model
+# -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
 class Users(db.Model):
     # define the Users schema
     userID = db.Column(db.Integer, primary_key=True)
@@ -11,6 +19,7 @@ class Users(db.Model):
     password = db.Column(db.String(255), unique=False, nullable=False)
     phone = db.Column(db.String(255), unique=False, nullable=False)
 
+    # constructor of a User object, initializes of instance variables within object
     def __init__(self, name, email, password, phone):
         self.name = name
         self.email = email
@@ -29,6 +38,8 @@ class Users(db.Model):
             db.session.remove()
             return None
 
+    # CRUD read converts self to dictionary
+    # returns dictionary
     def read(self):
         return {
             "userID": self.userID,
@@ -39,7 +50,8 @@ class Users(db.Model):
             "query": "by_alc"  # This is for fun, a little watermark
         }
 
-
+    # CRUD update: updates users name, password, phone
+    # returns self
     def update(self, name, password="", phone=""):
         """only updates values with length"""
         if len(name) > 0:
@@ -51,7 +63,8 @@ class Users(db.Model):
         db.session.commit()
         return self
 
-  
+    # CRUD delete: remove self
+    # None
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -67,9 +80,15 @@ def model_tester():
     print("--------------------------")
     db.create_all()
     """Tester data for table"""
-    u1 = Users(name='Charlie Brown', email='cbrown@example.com', password='readhair123', phone="0000000000")
-    u2 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='codecodecode', phone="1111111111")
-    table = [u1, u2]
+    u1 = Users(name='Thomas Edison', email='tedison@example.com', password='123toby', phone="1111111111")
+    u2 = Users(name='Nicholas Tesla', email='ntesla@example.com', password='123niko', phone="1111112222")
+    u3 = Users(name='Alexander Graham Bell', email='agbell@example.com', password='123lex', phone="1111113333")
+    u4 = Users(name='Eli Whitney', email='eliw@example.com', password='123whit', phone="1111114444")
+    u5 = Users(name='John Mortensen', email='jmort1021@gmail.com', password='123qwerty', phone="8587754956")
+    u6 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8587754956")
+    # U7 intended to fail as duplicate key
+    u7 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8586791294")
+    table = [u1, u2, u3, u4, u5, u6, u7]
     for row in table:
         try:
             db.session.add(row)
@@ -90,5 +109,5 @@ def model_printer():
 
 
 if __name__ == "__main__":
-    model_tester()  
+    model_tester()  # builds model of Users
     model_printer()

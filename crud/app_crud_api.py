@@ -1,8 +1,11 @@
+"""control dependencies to support CRUD routes and APIs"""
 from flask import Blueprint, render_template
 from flask_restful import Api, Resource
 import requests
 
 from crud.sql import *
+
+# blueprint defaults https://flask.palletsprojects.com/en/2.0.x/api/#blueprint-objects
 
 app_crud_api = Blueprint('crud_api', __name__,
                          url_prefix='/crud_api',
@@ -10,13 +13,18 @@ app_crud_api = Blueprint('crud_api', __name__,
                          static_folder='static',
                          static_url_path='static')
 
+# API generator https://flask-restful.readthedocs.io/en/latest/api.html#id1
 api = Api(app_crud_api)
 
 
+# Method #2 for CRUD
 @app_crud_api.route('/')
 def crud_api():
     """obtains all Users from table and loads Admin Form"""
     return render_template("crud_async.html", table=users_all())
+
+
+""" API routes section """
 
 
 class UsersAPI:
@@ -57,6 +65,8 @@ class UsersAPI:
             po.update(name)
             return po.read()
 
+        # class for update/put
+
     class _UpdateName(Resource):
         def put(self, userid, name):
             po = user_by_id(userid)
@@ -72,6 +82,7 @@ class UsersAPI:
             po.update(name, password, phone)
             return po.read()
 
+    # class for delete
     class _Delete(Resource):
         def delete(self, userid):
             po = user_by_id(userid)
@@ -80,7 +91,9 @@ class UsersAPI:
             data = po.read()
             po.delete()
             return data
-          
+
+    # building RESTapi resource
+    # building RESTapi resource
     api.add_resource(_Create, '/create/<string:name>/<string:email>/<string:password>/<string:phone>')
     api.add_resource(_Read, '/read/')
     api.add_resource(_ReadID, '/read/<int:userid>')
@@ -103,9 +116,21 @@ def api_tester():
     METHOD = 1
     tests = [
         ['/create/Wilma Flintstone/wilma@bedrock.org/123wifli/0001112222', "post"],
+        ['/create/Fred Flintstone/fred@bedrock.org/123wifli/0001112222', "post"],
+        ['/read/', "get"],
+        ['/read/1', "get"],
+        ['/read/ilike/John', "get"],
+        ['/read/ilike/com', "get"],
+        ['/update/wilma@bedrock.org/Wilma S Flintstone/123wsfli/0001112229', "put"],
+        ['/update/wilma@bedrock.org/Wilma Slaghoople Flintstone', "put"],
+        ['/delete/4', "delete"],
+        ['/read/4', "get"],
+        ['/delete/5', "delete"],
+        ['/read/5', "get"],
+        ['/update/1/Thomas Alva Edison', "put"]
     ]
 
-
+    # loop through each test condition and provide feedback
     for test in tests:
         print()
         print(f"({test[METHOD]}, {url + test[API]})")
@@ -134,6 +159,8 @@ def api_printer():
     for user in users_all():
         print(user)
 
+
+"""validating api's requires server to be running"""
 if __name__ == "__main__":
     api_tester()
     api_printer()

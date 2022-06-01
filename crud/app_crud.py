@@ -10,6 +10,12 @@ app_crud = Blueprint('crud', __name__,
                      static_folder='static',
                      static_url_path='static')
 
+""" Application control for CRUD is main focus of this File, key features:
+    1.) User table queries
+    2.) app routes for CRUD (Blueprint)
+"""
+
+
 # Default URL
 @app_crud.route('/')
 def crud():
