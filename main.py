@@ -1,5 +1,6 @@
 # import "packages" from flask
 from flask import Flask, render_template, request
+
 import os
 import requests
 import json
@@ -44,6 +45,12 @@ def spinningwheel():
 def weather():
     return render_template("weather.html")
 
+@app.route('/blog/')
+def blog():
+    return render_template("upload.html")
+
+
+
 # runs the application on the development server
 if __name__ == "__main__":
-    app.run(debug=True,port=8080)
+    app.run(debug=True,port=8000)
