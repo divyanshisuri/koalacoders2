@@ -1,9 +1,6 @@
 # import "packages" from flask
 from flask import Flask, render_template, request
 
-from crud.app_crud import app_crud
-from database.app_database import app_database
-
 
 from __init__ import app
 
@@ -13,11 +10,10 @@ import json
 from requests import get
 import random
 
+
 # create a Flask instance
 app = Flask(__name__)
 
-app.register_blueprint(app_crud)
-app.register_blueprint(app_database)
 
 # connects default URL to render index.html
 @app.route('/')
@@ -28,6 +24,14 @@ def index():
 @app.route('/platformer/')
 def platformer():
     return render_template("platformer.html")
+
+@app.route('/login/')
+def login():
+    return render_template("login.html")
+
+@app.route('/database/')
+def database():
+    return render_template("database.html")
 
 @app.route('/map/')
 def map():
@@ -40,7 +44,6 @@ def dailychecklist():
 @app.route('/snake/')
 def snake():
     return render_template("snake.html")
-
 
 
 @app.route('/gradecalc/')
@@ -58,6 +61,18 @@ def weather():
 @app.route('/blog/')
 def blog():
     return render_template("upload.html")
+
+@app.route('/calculator/')
+def calculator():
+    return render_template("calculator.html")
+
+@app.route('/whiteboard/')
+def whiteboard():
+    return render_template("whiteboard.html")
+
+@app.route('/calendar/')
+def calendar():
+    return render_template("calendar.html")
 
 @app.route('/crud/')
 def crud():
