@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% block meta %}
+<script>
+        function pageFxn() {
+            const one = document.getElementById("1box")
+            const two = document.getElementById("2box")
+            const three = document.getElementById("3box")
+
+
+            if (one.checked) {
+                    location.replace("result_recipe_rice")
+                }
+                else
+                {
+                    if (two.checked) {
+                        location.replace("result_recipe_potatos")
+                    }
+                    else {
+                        location.replace("result_recipe_milk")
+
+                    }
+                }
+
+
+            if (one.checked && two.checked) {
+                location.replace("result_recipe_rp")
+            }
+
+            if (two.checked && three.checked) {
+                location.replace("result_recipe_pm")
+            }
+            if (one.checked && three.checked) {
+                location.replace("result_recipe_rm")
+            }
+            if (one.checked && two.checked && three.checked) {
+                location.replace("result_recipe_all")
+            }
+
+
+        }
+    </script>
+
+
+
+{% endblock %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+</head>
+
+{% extends "pagelayout/index.html" %}
+{% set page_title = "Recipe Generator" %}
+
+{% set page_description = "For a personalized recipe, check all the ingredients you already have, and we will give you a meal option!" %}
+
+{% set img = "https://cdn.loveandlemons.com/wp-content/uploads/2020/03/bean-recipes-1.jpg" %}
+
+{% block content %}
+<style>
+        .button1 {
+            border: 2px solid #463d3d;
+            border-radius: 4px;
+            padding: 5px;
+            width: 50px;
+            color: antiquewhite;
+            font-size: 15px;
+            background-color: darkblue;
+        }
+
+        /* hover over effect*/
+        .button1:hover {
+            box-shadow: 0 0 2px 2px rgba(0, 140, 186, 0.5);
+            transform:scale(2);
+            background-color: gray;
+        }
+        .button2 {
+            border: 2px solid #463d3d;
+            border-radius: 4px;
+            padding: 5px;
+            width: 50px;
+            color: antiquewhite;
+            font-size: 15px;
+            background-color: darkblue;
+        }
+
+        /* hover over effect*/
+        .button2:hover {
+            box-shadow: 0 0 2px 2px rgba(0, 140, 186, 0.5);
+            transform:scale(2);
+            background-color: gray;
+        }
+
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: darkcyan;
+        }
+
+        #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myInput:focus {outline: 3px solid #ddd;}
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {background-color: #ddd;}
+
+        .show {display: block;}
+    </style>
+</head>
+<body>
+<input type="checkbox" name="Rice" class="incline checkbox" id="1box" value="1">   Rice     <br><br><br>
+
+<input type="checkbox" name="Potatoes" class="incline checkbox" id="2box" value="1">   Potatoes    <br><br><br>
+
+<input type="checkbox" name="Milk" class="incline checkbox" id="3box" value="1">   Milk    <br><br><br>
+
+
+<input type="button" onclick="pageFxn()" class="button button2" value="Go!">
+
+
+
+{% endblock %}
+
+
+
+</body>
+</html>
